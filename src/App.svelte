@@ -119,16 +119,16 @@
     <div class="button-row">
         <span id="sort-buttons">
             <label class="radio">
-                <input type="radio" on:change={changeSort('id')} name="sort-pokemon" value="id" checked>
+                <input type="radio" on:change={() => changeSort('id')} name="sort-pokemon" value="id" checked>
                 Sort by ID
             </label>
             <label class="radio">
-                <input type="radio" on:change={changeSort('type')} name="sort-pokemon" value="type">
+                <input type="radio" on:change={() => changeSort('type')} name="sort-pokemon" value="type">
                 Sort by Type
             </label>
         </span>
         <div class="select">
-            <select on:change={changeSelectedType} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
+            <select on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
@@ -150,7 +150,7 @@
             </select>
         </div>
     </div>
-    <button on:click={modalVisible = !modalVisible} class="button favorites-button">View Favorites</button>
+    <button on:click={() => {modalVisible = !modalVisible}} class="button favorites-button">View Favorites</button>
 
     <table class="table">
         <thead>
@@ -170,7 +170,7 @@
                 <td>{pokemon.type}</td>
                 <td><a href={pokemon.image}>View</a></td>
                 <td>
-                    <input on:click={toggleFavorite(pokemon)} type="checkbox" class="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false}>
+                    <input on:click={() => {toggleFavorite(pokemon)}} type="checkbox" class="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false}>
                 </td>
             </tr>
             {/each}
@@ -178,8 +178,8 @@
     </table>
 
     <div class="button-row">
-        <button on:click={changeOffsetAndRefresh(-10)} class="button">Previous</button>
-        <button on:click={changeOffsetAndRefresh(10)} class="button">Next</button>
+        <button on:click={() => changeOffsetAndRefresh(-10)} class="button">Previous</button>
+        <button on:click={() => changeOffsetAndRefresh(10)} class="button">Next</button>
     </div>
 
     <div class="modal {modalVisible ? 'is-active' : ''}">
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        <button on:click={modalVisible = false} class="modal-close is-large" aria-label="close"></button>
+        <button on:click={() => {modalVisible = false}} class="modal-close is-large" aria-label="close"></button>
     </div>
     <p>This project is for educational uses only.</p>
 </main>
