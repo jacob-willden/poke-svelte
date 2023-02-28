@@ -12,7 +12,7 @@
     let selectedType = 1;
 
     onMount(async () => {
-        //get10Pokemon(0, sortSelection);
+        get10Pokemon(0, sortSelection);
     });
 
     // Derived from async Fetch example in Vue: https://blog.bitsrc.io/requests-in-vuejs-fetch-api-and-axios-a-comparison-a0c13f241888
