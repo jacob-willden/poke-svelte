@@ -15,7 +15,6 @@
         get10Pokemon(0, sortSelection);
     });
 
-    // Derived from async Fetch example in Vue: https://blog.bitsrc.io/requests-in-vuejs-fetch-api-and-axios-a-comparison-a0c13f241888
     async function fetchData(url) {
         try {
             const response = await fetch(url);
@@ -129,7 +128,7 @@
             </label>
         </span>
         <div class="select">
-            <select on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
+            <select on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}>
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
