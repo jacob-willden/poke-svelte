@@ -49,7 +49,7 @@
             pokemonToDisplay = [];
 
             const idexesToFetch = [];
-            for(let i = offset; i <= offset + 10; i++) {
+            for(let i = offset; i <= offset + 9; i++) {
                 if(i < typeList.pokemon.length - 10) {
                     idexesToFetch.push(i);
                 }
@@ -95,7 +95,7 @@
         else {
             favoritePokemon.splice(index, 1);
         }
-        //console.log('new favorites:', favoritePokemon);
+        console.log('new favorites:', favoritePokemon);
     }
 
     function changeSort(selection) {
@@ -199,12 +199,12 @@
                     </thead>
                     <tbody>
                         {#each favoritePokemon as pokemon (pokemon.id)}
-                            <tr>
-                                <td>{pokemon.id}</td>
-                                <td>{pokemon.name}</td>
-                                <td>{pokemon.type}</td>
-                                <td><a href={pokemon.image}>View</a></td>
-                            </tr>
+                        <tr>
+                            <td>{pokemon.id}</td>
+                            <td>{pokemon.name}</td>
+                            <td>{pokemon.type}</td>
+                            <td><a href={pokemon.image}>View</a></td>
+                        </tr>
                         {/each}
                     </tbody>
                 </table>
