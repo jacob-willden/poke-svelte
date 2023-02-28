@@ -117,3 +117,103 @@
     }
 </script>
 
+<main>
+    <h1 class="title">Pokémon Vue App</h1>
+    <div class="button-row">
+        <span id="sort-buttons">
+            <label class="radio">
+                <input type="radio" on:change={changeSort('id')} name="sort-pokemon" value="id" checked>
+                Sort by ID
+            </label>
+            <label class="radio">
+                <input type="radio" on:change={changeSort('type')} name="sort-pokemon" value="type">
+                Sort by Type
+            </label>
+        </span>
+        <div class="select">
+            <select on:change={changeSelectedType($event.target.value)} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
+                <option value="1">Normal</option>
+                <option value="2">Fighting</option>
+                <option value="3">Flying</option>
+                <option value="4">Poison</option>
+                <option value="5">Ground</option>
+                <option value="6">Rock</option>
+                <option value="7">Bug</option>
+                <option value="8">Ghost</option>
+                <option value="9">Steel</option>
+                <option value="10">Fire</option>
+                <option value="11">Water</option>
+                <option value="12">Grass</option>
+                <option value="13">Electric</option>
+                <option value="14">Psychic</option>
+                <option value="15">Ice</option>
+                <option value="16">Dragon</option>
+                <option value="17">Dark</option>
+                <option value="18">Fairy</option>
+            </select>
+        </div>
+    </div>
+    <button on:click={modalVisible = !modalVisible} class="button favorites-button">View Favorites</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Primary Type</th>
+                <th>Image</th>
+                <th>Favorite?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each pokemonToDisplay as pokemon (pokemon.id)}
+            <tr>
+                <td>{pokemon.id}</td>
+                <td>{pokemon.name}</td>
+                <td>{pokemon.type}</td>
+                <td><a href={pokemon.image}>View</a></td>
+                <td>
+                    <input on:click={toggleFavorite(pokemon)} type="checkbox" class="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false}>
+                </td>
+            </tr>
+            {/each}
+        </tbody>
+    </table>
+
+    <div class="button-row">
+        <button on:click={changeOffsetAndRefresh(-10)} class="button">Previous</button>
+        <button on:click={changeOffsetAndRefresh(10)} class="button">Next</button>
+    </div>
+
+    <div class="modal {modalVisible ? 'is-active' : ''}">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+            <div class="box">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Primary Type</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each favoritePokemon as pokemon (pokemon.id)}
+                            <tr>
+                                <td>{pokemon.id}</td>
+                                <td>{pokemon.name}</td>
+                                <td>{pokemon.type}</td>
+                                <td><a href={pokemon.image}>View</a></td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button on:click={modalVisible = false} class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <p>This project is for educational uses only.</p>
+</main>
