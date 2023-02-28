@@ -1,4 +1,5 @@
 <script>
+    import 'bulma/css/bulma.min.css';
     import { onMount } from "svelte";
 
     let pokemonToDisplay = [];
@@ -216,6 +217,11 @@
 </main>
 
 <style>
+    main {
+        padding: 2rem 1rem;
+        max-width: 30rem;
+        margin: 0 auto;
+    }
 	h1 {
 		font-size: 2rem;
 	}
