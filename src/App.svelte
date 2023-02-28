@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
 
-
     let pokemonToDisplay = [];
     let totalPokemon = 1279;
     let offset = 0;
@@ -87,11 +86,9 @@
         }
     }
 
-    function toggleFavorite(pokemonProxy) {
-        const pokemon = JSON.parse(JSON.stringify(pokemonProxy)); // To extract Proxy object data, from Mert on StackOverflow: https://stackoverflow.com/questions/66605274/accessing-a-proxy-object-in-vue3
-
-            const index = favoritePokemon.findIndex(item => item.id.toString() === pokemon.id);
-            if(index === -1) {
+    function toggleFavorite(pokemon) {
+        const index = favoritePokemon.findIndex(item => item.id.toString() === pokemon.id);
+        if(index === -1) {
             favoritePokemon.push(pokemon);
         }
         else {
@@ -111,8 +108,8 @@
         changeOffsetAndRefresh(0);
     }
 
-    function changeSelectedType(type) {
-        selectedType = type;
+    function changeSelectedType(event) {
+        selectedType = event.target.value;
         changeOffsetAndRefresh(0);
     }
 </script>
@@ -131,7 +128,7 @@
             </label>
         </span>
         <div class="select">
-            <select on:change={changeSelectedType($event.target.value)} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
+            <select on:change={changeSelectedType} disabled={selectDisabled}> <!-- https://stackoverflow.com/questions/51953173/how-do-i-pass-input-text-using-v-onchange-to-my-vue-method -->
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
@@ -217,3 +214,21 @@
     </div>
     <p>This project is for educational uses only.</p>
 </main>
+
+<style>
+	h1 {
+		font-size: 2rem;
+	}
+	.button-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 1rem;
+	}
+	.select {
+		margin-left: 1rem;
+	}
+	.favorites-button {
+		margin-bottom: 1rem;
+	}
+</style>
