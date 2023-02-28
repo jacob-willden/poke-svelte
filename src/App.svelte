@@ -89,12 +89,12 @@
     function toggleFavorite(pokemon) {
         const index = favoritePokemon.findIndex(item => item.id.toString() === pokemon.id);
         if(index === -1) {
-            favoritePokemon.push(pokemon);
+            favoritePokemon = [...favoritePokemon, pokemon]; // Reactive alternative to push, from the official Svelte tutorial: https://svelte.dev/tutorial/updating-arrays-and-objects
         }
         else {
-            favoritePokemon.splice(index, 1);
+            favoritePokemon = favoritePokemon.filter(item => item.id.toString() !== pokemon.id); // Reactive alternative to splice, from Tholle on StackOverflow: https://stackoverflow.com/questions/58964087/how-to-update-an-array-after-splice-in-svelte
         }
-        console.log('new favorites:', favoritePokemon);
+        //console.log('new favorites:', favoritePokemon);
     }
 
     function changeSort(selection) {
