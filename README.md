@@ -1,5 +1,7 @@
 # Poké-Svelte
 
+[Live App on Vercel](https://poke-svelte-chi.vercel.app/)
+
 ## Installation Instructions
 1. Install [NPM](https://nodejs.org/en/download), if you don't already have it installed
 2. Download the repository and extract the ZIP file
