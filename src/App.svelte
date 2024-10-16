@@ -1,5 +1,4 @@
 <script>
-    import 'bulma/css/bulma.min.css'; // From Carlos Roso: https://carlosroso.com/how-to-import-css-files-to-svelte/
     import { onMount } from "svelte";
 
     let pokemonToDisplay = [];
