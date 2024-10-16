@@ -150,7 +150,7 @@
             </select>
         </div>
     </div>
-    <button on:click={() => {modalElement.showModal()}}>View Favorites</button>
+    <button on:click={() => {modalElement.showModal()}} class="favorites-button">View Favorites</button>
 
     <table class="table">
         <thead>
