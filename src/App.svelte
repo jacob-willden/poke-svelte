@@ -232,4 +232,7 @@
     table {
         width: 100%;
     }
+    thead th {
+        text-align: start;
+    }
 </style>
