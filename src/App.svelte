@@ -6,9 +6,9 @@
     let offset = 0;
     let sortSelection = 'id';
     let favoritePokemon = [];
-    let modalVisible = false;
     let selectDisabled = true;
     let selectedType = 1;
+    let modalElement = null;
 
     onMount(async () => {
         get10Pokemon(0, sortSelection);
@@ -127,7 +127,8 @@
             </label>
         </span>
         <div class="select">
-            <select on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}>
+            <label for="type-select">Type</label>
+            <select id="type-select" on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}>
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
@@ -149,7 +150,7 @@
             </select>
         </div>
     </div>
-    <button on:click={() => {modalVisible = true}} class="button favorites-button">View Favorites</button>
+    <button on:click={() => {modalElement.showModal()}}>View Favorites</button>
 
     <table class="table">
         <thead>
@@ -181,36 +182,29 @@
         <button on:click={() => changeOffsetAndRefresh(10)} class="button">Next</button>
     </div>
 
-    <div class="modal {modalVisible ? 'is-active' : ''}">
-        <div class="modal-background"></div>
-
-        <div class="modal-content">
-            <div class="box">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Primary Type</th>
-                            <th>Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each favoritePokemon as pokemon (pokemon.id)}
-                        <tr>
-                            <td>{pokemon.id}</td>
-                            <td>{pokemon.name}</td>
-                            <td>{pokemon.type}</td>
-                            <td><a href={pokemon.image}>View</a></td>
-                        </tr>
-                        {/each}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <button on:click={() => {modalVisible = false}} class="modal-close is-large" aria-label="close"></button>
-    </div>
+    <dialog bind:this={modalElement}>
+        <button on:click={() => {modalElement.close()}}>Close</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Primary Type</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each favoritePokemon as pokemon (pokemon.id)}
+                <tr>
+                    <td>{pokemon.id}</td>
+                    <td>{pokemon.name}</td>
+                    <td>{pokemon.type}</td>
+                    <td><a href={pokemon.image}>View</a></td>
+                </tr>
+                {/each}
+            </tbody>
+        </table>
+    </dialog>
     <p>This project uses the <a href="https://pokeapi.co/">the PokéAPI (Pokémon Application Programming Interface)</a>.</p>
 </main>
 
