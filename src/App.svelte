@@ -229,4 +229,7 @@
 	.favorites-button {
 		margin-bottom: 1rem;
 	}
+    table {
+        width: 100%;
+    }
 </style>
