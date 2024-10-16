@@ -6,7 +6,6 @@
     let offset = 0;
     let sortSelection = 'id';
     let favoritePokemon = [];
-    let selectDisabled = true;
     let selectedType = 1;
     let modalElement = null;
 
@@ -97,14 +96,10 @@
     }
 
     function changeSort(selection) {
-        sortSelection = selection;
-        if(selection === 'id') {
-            selectDisabled = true;
+        if(selection === 'type') {
+            sortSelection = selection;
+            changeOffsetAndRefresh(0);
         }
-        else if(selection === 'type') {
-            selectDisabled = false;
-        }
-        changeOffsetAndRefresh(0);
     }
 
     function changeSelectedType(event) {
@@ -128,7 +123,7 @@
         </span>
         <div class="select">
             <label for="type-select">Type</label>
-            <select id="type-select" on:change={(event) => changeSelectedType(event)} disabled={selectDisabled}>
+            <select id="type-select" on:change={(event) => changeSelectedType(event)}>
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
