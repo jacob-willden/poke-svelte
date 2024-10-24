@@ -1,13 +1,13 @@
 <script>
     import { onMount } from "svelte";
 
-    let pokemonToDisplay = [];
-    let totalPokemon = 1279;
-    let offset = 0;
-    let sortSelection = 'id';
-    let favoritePokemon = [];
+	const totalPokemon = 1279;
+	let offset = 0;
+	let sortSelection = 'id';
     let selectedType = 1;
-    let modalElement = null;
+    let modalElement;
+    let pokemonToDisplay = $state([]);
+    let favoritePokemon = $state([]);
 
     onMount(async () => {
         get10Pokemon(0, sortSelection);
@@ -86,12 +86,11 @@
 
     function toggleFavorite(pokemon) {
         const index = favoritePokemon.findIndex(item => item.id.toString() === pokemon.id);
-        // Using non-mutation methods to trigger reactivity, as pointed out by the official Svelte tutorial: https://svelte.dev/tutorial/updating-arrays-and-objects
         if(index === -1) {
-            favoritePokemon = [...favoritePokemon, pokemon]; // Add item to array, from Mozilla Developer Network: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+			favoritePokemon.push(pokemon);
         }
         else {
-            favoritePokemon = favoritePokemon.filter(item => item.id.toString() !== pokemon.id); // Cut out any items with the ID, from Mozilla Developer Network: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+			favoritePokemon.splice(index, 1);
         }
         //console.log('new favorites:', favoritePokemon);
     }
@@ -114,17 +113,17 @@
     <div class="button-row">
         <span id="sort-buttons">
             <label class="radio">
-                <input type="radio" on:change={() => changeSort('id')} name="sort-pokemon" value="id" checked>
+                <input type="radio" onchange={() => changeSort('id')} name="sort-pokemon" value="id" checked>
                 Sort by ID
             </label>
             <label class="radio">
-                <input type="radio" on:change={() => changeSort('type')} name="sort-pokemon" value="type">
+                <input type="radio" onchange={() => changeSort('type')} name="sort-pokemon" value="type">
                 Sort by Type
             </label>
         </span>
         <div class="select">
             <label for="type-select">Type</label>
-            <select id="type-select" on:change={(event) => changeSelectedType(event)}>
+            <select id="type-select" onchange={(event) => changeSelectedType(event)}>
                 <option value="1">Normal</option>
                 <option value="2">Fighting</option>
                 <option value="3">Flying</option>
@@ -146,7 +145,7 @@
             </select>
         </div>
     </div>
-    <button on:click={() => {modalElement.showModal()}} class="favorites-button">View Favorites</button>
+    <button onclick={() => {modalElement.showModal()}} class="favorites-button">View Favorites</button>
 
     <table class="table">
         <thead>
@@ -166,7 +165,7 @@
                 <td>{pokemon.type}</td>
                 <td><a href={pokemon.image}>View</a></td>
                 <td>
-                    <input on:click={() => {toggleFavorite(pokemon)}} type="checkbox" class="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false}>
+                    <input onclick={() => {toggleFavorite(pokemon)}} type="checkbox" class="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false}>
                 </td>
             </tr>
             {/each}
@@ -174,12 +173,12 @@
     </table>
 
     <div class="button-row">
-        <button on:click={() => changeOffsetAndRefresh(-10)} class="button">Previous</button>
-        <button on:click={() => changeOffsetAndRefresh(10)} class="button">Next</button>
+        <button onclick={() => changeOffsetAndRefresh(-10)} class="button">Previous</button>
+        <button onclick={() => changeOffsetAndRefresh(10)} class="button">Next</button>
     </div>
 
     <dialog bind:this={modalElement}>
-        <button on:click={() => {modalElement.close()}}>Close</button>
+        <button onclick={() => {modalElement.close()}}>Close</button>
         <table class="table">
             <thead>
                 <tr>
