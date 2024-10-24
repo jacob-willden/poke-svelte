@@ -1,13 +1,13 @@
 <script>
     import { onMount } from "svelte";
 
-    let pokemonToDisplay = [];
-    let totalPokemon = 1279;
-    let offset = 0;
-    let sortSelection = 'id';
-    let favoritePokemon = [];
+	const totalPokemon = 1279;
+	let offset = 0;
+	let sortSelection = 'id';
     let selectedType = 1;
-    let modalElement = null;
+    let modalElement;
+    let pokemonToDisplay = $state([]);
+    let favoritePokemon = $state([]);
 
     onMount(async () => {
         get10Pokemon(0, sortSelection);
