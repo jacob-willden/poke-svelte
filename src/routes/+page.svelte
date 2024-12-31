@@ -109,7 +109,7 @@
 </script>
 
 <main>
-    <h1 class="title">Pokémon Vue App</h1>
+    <h1 class="title">Poké-Svelte</h1>
     <div class="button-row">
         <span id="sort-buttons">
             <label class="radio">
