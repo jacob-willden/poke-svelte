@@ -17,11 +17,34 @@ export const load = () => {
 		return {files: []}; // Need to figure out the directories for development
 	}
 	else {
-		let files = [];
+		let fileNames = [];
 		const folders = ['chunks', 'entry', 'nodes'];
 		for(let folder of folders) {
-			files.push(getFilePathsFromFolder(`${parentPath}/${folder}`));
+			fileNames.push(getFilePathsFromFolder(`${parentPath}/${folder}`));
 		}
-		return {files: files.flat()};
+		const flattenedFileNames = fileNames.flat();
+		let files = [];
+		for(let fileName of flattenedFileNames) {
+			const isFromSvelteKit = !fileName.startsWith('/_app/immutable/nodes/2.');
+			if(isFromSvelteKit) {
+				files.push({
+					name: fileName,
+					licenseURL: 'https://www.jclark.com/xml/copying.txt',
+					licenseName: 'Expat',
+					sourceURL: 'https://github.com/sveltejs/kit',
+					sourceName: 'SvelteKit'
+				});
+			}
+			else {
+				files.push({
+					name: fileName,
+					licenseURL: 'https://oss.oracle.com/licenses/upl/',
+					licenseName: 'UPL-1.0',
+					sourceURL: 'https://github.com/jacob-willden/poke-svelte/blob/main/src/routes/%2Bpage.svelte',
+					sourceName: 'routes/+page.svelte'
+				});
+			}
+		}
+		return {files};
 	}
 }

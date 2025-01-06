@@ -55,16 +55,11 @@ for the JavaScript code in this page.
 <main>
 	<table id="jslicense-labels1">
 		<tbody>
-			<!-- <tr>
-				<td><a href="/_app/immutable/nodes/2.CpDsTaVX.js">2.CpDsTaVX.js</a></td>
-				<td><a href="https://oss.oracle.com/licenses/upl/">UPL-1.0</a></td>
-				<td><a href="https://github.com/jacob-willden/poke-svelte/blob/main/src/routes/%2Bpage.svelte">+page.svelte</a></td>
-			</tr> -->
 			{#each data.files as file}
 				<tr>
-					<td><a href={file}>{file}</a></td>
-					<td><a href="https://www.jclark.com/xml/copying.txt">Expat</a></td>
-					<td><a href="https://github.com/sveltejs/kit">SvelteKit</a></td>
+					<td><a href={file.name}>{file.name}</a></td>
+					<td><a href={file.licenseURL}>{file.licenseName}</a></td>
+					<td><a href={file.sourceURL}>{file.sourceName}</a></td>
 				</tr>
 			{/each}
 		</tbody>
