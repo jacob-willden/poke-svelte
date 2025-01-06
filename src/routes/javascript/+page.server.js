@@ -41,7 +41,7 @@ export const load = () => {
 					licenseURL: 'https://oss.oracle.com/licenses/upl/',
 					licenseName: 'UPL-1.0',
 					sourceURL: 'https://github.com/jacob-willden/poke-svelte/blob/main/src/routes/%2Bpage.svelte',
-					sourceName: 'routes/+page.svelte'
+					sourceName: 'src/routes/+page.svelte'
 				});
 			}
 		}
