@@ -2,6 +2,7 @@
 	"name": "poke-svelte",
 	"version": "0.0.1",
 	"type": "module",
+	"license": "UPL-1.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
