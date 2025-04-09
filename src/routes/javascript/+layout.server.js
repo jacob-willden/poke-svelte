@@ -13,7 +13,7 @@ export function load() {
 				if(isFromSvelteKit) {
 					files.push({
 						name: `${building ? '/_app/immutable' : parentPath}/${fileName}`,
-						licenseURL: 'https://www.jclark.com/xml/copying.txt',
+						licenseURL: 'http://www.jclark.com/xml/copying.txt',
 						licenseName: 'Expat',
 						sourceURL: 'https://github.com/sveltejs/kit',
 						sourceName: 'SvelteKit'
